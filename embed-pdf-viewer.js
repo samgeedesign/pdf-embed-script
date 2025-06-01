@@ -22,18 +22,34 @@ function fetchPDF(urlToPDF) {
 
 // PDF Viewer Initialization
 function initializeAdobeViewer() {
+  console.log("📄 Adobe Viewer initializing...");
+
   const viewerDiv = document.getElementById("adobe-dc-view");
-  if (!viewerDiv || viewerDiv.getAttribute("data-pdf-loaded") === "true") return;
+  if (!viewerDiv) {
+    console.log("❌ adobe-dc-view div not found.");
+    return;
+  }
+
+  if (viewerDiv.getAttribute("data-pdf-loaded") === "true") {
+    console.log("⏭ Viewer already loaded. Skipping.");
+    return;
+  }
 
   const dropboxLink = viewerDiv.getAttribute("data-pdf-url");
-  if (!dropboxLink) return;
+  console.log("🔗 Dropbox Link:", dropboxLink);
+
+  if (!dropboxLink) {
+    console.log("❌ No Dropbox link found in data-pdf-url attribute.");
+    return;
+  }
 
   const urlToPDF = dropboxLink
     .replace("www.dropbox.com", "dl.dropboxusercontent.com")
     .replace("?dl=0", "");
+  console.log("✅ Transformed PDF URL:", urlToPDF);
 
   const adobeDCView = new AdobeDC.View({
-    clientId: "3ab6c765d35c454aa9aeaa529c56eafd", // ← Replace this with your actual Adobe API key
+    clientId: "3ab6c765d35c454aa9aeaa529c56eafd", // ← Replace this if needed
     divId: "adobe-dc-view"
   });
 
@@ -50,6 +66,7 @@ function initializeAdobeViewer() {
   });
 
   viewerDiv.setAttribute("data-pdf-loaded", "true");
+  console.log("✅ Adobe Viewer initialized and marked as loaded.");
 }
 
 // Run viewer setup after SDK is ready
