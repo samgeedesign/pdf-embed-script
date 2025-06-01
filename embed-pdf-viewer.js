@@ -33,7 +33,7 @@ function initializeAdobeViewer() {
     .replace("?dl=0", "");
 
   const adobeDCView = new AdobeDC.View({
-    clientId: "YOUR-NEW-API-KEY", // ← Replace this with your actual Adobe API key
+    clientId: "3ab6c765d35c454aa9aeaa529c56eafd", // ← Replace this with your actual Adobe API key
     divId: "adobe-dc-view"
   });
 
